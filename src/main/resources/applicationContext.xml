@@ -15,22 +15,18 @@
     <annotation-driven/>
 
     <!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
-    <!--<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">-->
-        <!--<beans:constructor-arg>-->
-            <!--<beans:bean id="test"/>-->
-        <!--</beans:constructor-arg>-->
-        <!--<beans:property name="prefix" value="/WEB-INF/views/"/>-->
-        <!--<beans:property name="suffix" value=".jsp"/>-->
-    <!--</beans:bean>-->
-    <!--s-->
+    <beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <beans:property name="prefix" value="/WEB-INF/views/"/>
+        <beans:property name="suffix" value=".jsp"/>
+    </beans:bean>
 
     <beans:bean name="someComponent" class="vk.dev.inpas.SomeComponent"
-          init-method="init" destroy-method="close"
-          lazy-init="true" scope="prototype" >
+                init-method="init" destroy-method="close"
+                lazy-init="true" scope="prototype">
     </beans:bean>
 
     <beans:bean name="someService" class="vk.dev.inpas.SomeService"
-          init-method="init" destroy-method="close" >
+                init-method="init" destroy-method="close">
         <beans:constructor-arg ref="someComponent"/>
     </beans:bean>
 </beans:beans>
