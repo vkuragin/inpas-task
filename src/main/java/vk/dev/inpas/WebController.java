@@ -1,8 +1,10 @@
 package vk.dev.inpas;
 
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,13 +16,12 @@ import vk.dev.inpas.services.CalcService;
 /**
  * Created by vk on 18.03.2017
  */
-@org.springframework.stereotype.Controller
-public class Controller {
+@Controller
+@Slf4j
+@RequiredArgsConstructor
+public class WebController {
 
-    private Logger logger = LoggerFactory.getLogger(Controller.class);
-
-    @Autowired
-    private CalcService calcService;
+    private final CalcService calcService;
 
     @RequestMapping(path = "/")
     public ModelAndView main(Model model) {
@@ -43,7 +44,7 @@ public class Controller {
             model.addAttribute("result", result);
         }
 
-        logger.info("Input array: {},\n Error message={}\n, Result={}\n", inputString, errMsg, result);
+        log.info("Input array: {},\n Error message={}\n, Result={}\n", inputString, errMsg, result);
         return new ModelAndView("forward:/");
     }
 }

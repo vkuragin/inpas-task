@@ -12,7 +12,7 @@
         </c:if>
 
         <c:url var="calcAction" value="/calc"/>
-        <form action="${calcAction}" method="post">
+        <form action="${calcAction}" method="post" style="color: #5af">
             <div>
                 <p>Input array of integers delimited by ','</p>
                 <p>Example: 1,0,2,4,0,5</p>

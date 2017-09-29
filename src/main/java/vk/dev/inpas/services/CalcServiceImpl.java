@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
-import vk.dev.inpas.Controller;
+import vk.dev.inpas.WebController;
 
 import java.util.Arrays;
 import java.util.List;
@@ -21,7 +21,7 @@ public class CalcServiceImpl implements CalcService {
 
     private static final String INVALID_INPUT_REGEX = "[^,\\d]|,{2,}";
 
-    private Logger logger = LoggerFactory.getLogger(Controller.class);
+    private Logger logger = LoggerFactory.getLogger(WebController.class);
 
     @Override
     public Integer calc(List<Integer> src) {
