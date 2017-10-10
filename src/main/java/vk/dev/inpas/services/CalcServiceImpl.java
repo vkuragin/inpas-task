@@ -1,11 +1,9 @@
 package vk.dev.inpas.services;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
-import vk.dev.inpas.WebController;
 
 import java.util.Arrays;
 import java.util.List;
@@ -16,12 +14,11 @@ import java.util.stream.Collectors;
 /**
  * Created by vk on 18.03.2017
  */
+@Slf4j
 @Service
 public class CalcServiceImpl implements CalcService {
 
     private static final String INVALID_INPUT_REGEX = "[^,\\d]|,{2,}";
-
-    private Logger logger = LoggerFactory.getLogger(WebController.class);
 
     @Override
     public Integer calc(List<Integer> src) {
@@ -34,7 +31,7 @@ public class CalcServiceImpl implements CalcService {
         try {
             list = parse(src);
         } catch (Exception e) {
-            logger.error("Failed to parse input string", e);
+            log.error("Failed to parse input string", e);
         }
         return calc(list);
     }
@@ -56,8 +53,7 @@ public class CalcServiceImpl implements CalcService {
     ///////////////////////////////////////
 
     private List<Integer> parse(String src) {
-        return Arrays
-                .stream(src.split(","))
+        return Arrays.stream(src.split(","))
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
     }
@@ -106,16 +102,14 @@ public class CalcServiceImpl implements CalcService {
      * @return sum between two adjacent peeks
      */
     private Integer sumUp(List<Integer> integers) {
-        int sum = 0;
-        if (integers.size() < 3) return sum;
+        if (integers.size() < 3) return 0;
 
         // choose lesser of two peeks
         int peekValue = Math.min(integers.get(0), integers.get(integers.size() - 1));
 
-        for (int i = 1; i < integers.size(); i++) {
-            int currValue = integers.get(i);
-            if (currValue < peekValue) sum += peekValue - currValue;
-        }
-        return sum;
+        return integers.stream()
+                .map(value -> peekValue - value)
+                .filter(val -> val > 0)
+                .reduce(0, Integer::sum);
     }
 }
