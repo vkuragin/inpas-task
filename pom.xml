@@ -17,7 +17,7 @@
         <downloadSources>false</downloadSources>
         <downloadJavadocs>true</downloadJavadocs>
         <!-- Modules -->
-        <spring_version>4.3.3.RELEASE</spring_version>
+        <spring_version>5.2.20.RELEASE</spring_version>
         <slf4j.version>1.7.21</slf4j.version>
         <lombok.version>1.16.18</lombok.version>
     </properties>
